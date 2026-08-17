@@ -1,0 +1,40 @@
+name: 브리핑 데이터 수집
+
+# 매일 04:20 KST. 브리핑 발송(05:00)까지 40분 버퍼를 둔다.
+# GitHub Actions 크론은 혼잡 시간대에 5~15분 밀리는 경우가 있어 여유를 넉넉히 잡았다.
+on:
+  schedule:
+    - cron: '20 19 * * *'   # 19:20 UTC = 04:20 KST (익일)
+  workflow_dispatch:         # 수동 실행 버튼
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 데이터 수집
+        run: python collect.py
+
+      - name: 변경분 커밋
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/latest.json
+          if git diff --staged --quiet; then
+            echo "변경 없음 — 커밋 생략"
+          else
+            git commit -m "data: $(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M') KST"
+            git push
+          fi
