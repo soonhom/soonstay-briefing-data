@@ -44,46 +44,127 @@ def fetch_json(url, label):
 
 # ---------------------------------------------------------------- 환율
 
+# 원/달러·엔화는 항상 싣는다. 나머지는 "이슈가 있을 때만" 싣는데,
+# 그 판정을 브리핑 에이전트에게 맡기면 매번 기준이 흔들리므로 여기서 숫자로 정한다.
+# 고른 통화는 부산 인바운드와 실제로 연결되는 시장들이다(ECB 제공 범위 안에서).
+WATCH = {
+    "CNY": ("위안", 1),
+    "TWD": None,          # ECB 미제공 — 대만은 못 본다
+    "HKD": None,          # 달러 페그라 항상 달러를 따라간다. 볼 이유가 없다
+    "SGD": ("싱가포르달러", 1),
+    "THB": ("바트", 100),
+    "PHP": ("페소", 100),
+    "MYR": ("링깃", 1),
+    "IDR": ("루피아", 100),
+    "EUR": ("유로", 1),
+    "GBP": ("파운드", 1),
+    "AUD": ("호주달러", 1),
+    "USD": None,          # 아래에서 따로 다룬다
+    "JPY": None,
+}
+WATCH = {k: v for k, v in WATCH.items() if v}
+
+# 이슈 판정 기준: "달러 대비" 얼마나 다르게 움직였나.
+# 절대 변동률로 재면 달러에 연동된 통화들이 매번 딸려 나와 달러 얘기를 반복하게 된다.
+# 원/달러가 -4.6%인 날 페소도 -4.4%인 건 뉴스가 아니다. 갈라진 것만 뉴스다.
+NOTABLE_DIVERGENCE = 2.0   # %p
+NOTABLE_MAX = 2
+
+
+def _series(rows, code):
+    """EUR 기준 원계열에서 '1단위당 원화' 시계열을 뽑는다.
+
+    ECB 응답은 기준통화(EUR)를 rates에 넣어주지 않는다. EUR을 물으면
+    자기 자신이 없어서 빈 계열이 나오므로, 이 경우 비율을 1로 본다.
+    """
+    out = []
+    for d in sorted(rows):
+        r = rows[d]
+        if "KRW" not in r:
+            continue
+        rate = 1.0 if code == "EUR" else r.get(code)
+        if not rate:
+            continue
+        out.append({"date": d, "value": r["KRW"] / rate})
+    return out
+
+
+def _stats(points, unit=1, digits=2):
+    """최신값·전일대비·3개월 최고/최저·한달 변동률을 계산한다."""
+    if len(points) < 2:
+        return None
+    vals = [p["value"] * unit for p in points]
+    latest, prev = vals[-1], vals[-2]
+    high, low = max(vals), min(vals)
+
+    # 한 달 전(영업일 기준 대략 22개 전) 대비 변동률
+    i = max(0, len(vals) - 23)
+    month_ago = vals[i]
+    pct_1m = (latest - month_ago) / month_ago * 100 if month_ago else 0.0
+
+    return {
+        "latest": round(latest, digits),
+        "latest_date": points[-1]["date"],
+        "change": round(latest - prev, digits),
+        "change_pct": round((latest - prev) / prev * 100, 2) if prev else 0.0,
+        "high_3m": round(high, digits),
+        "high_3m_date": points[vals.index(high)]["date"],
+        "low_3m": round(low, digits),
+        "low_3m_date": points[vals.index(low)]["date"],
+        "pct_from_high": round((latest - high) / high * 100, 2) if high else 0.0,
+        "pct_1m": round(pct_1m, 2),
+        "at_3m_high": abs(latest - high) < 1e-9,
+        "at_3m_low": abs(latest - low) < 1e-9,
+        "unit": unit,
+    }
+
+
 def collect_fx(today):
-    """원/달러 3개월 시계열. 그래프용으로 주 1회 간격 13점을 뽑아둔다."""
+    """원/달러·엔화는 상시, 그 외 통화는 이슈가 있을 때만.
+
+    ECB 기준 EUR 계열 한 번만 받아서 교차환율로 전부 계산한다(요청 1회).
+    """
     start = (today - timedelta(days=92)).strftime("%Y-%m-%d")
     end = today.strftime("%Y-%m-%d")
-    url = f"https://api.frankfurter.dev/v1/{start}..{end}?from=USD&to=KRW"
+    symbols = ",".join(["KRW", "USD", "JPY"] + list(WATCH))
+    url = f"https://api.frankfurter.dev/v1/{start}..{end}?base=EUR&symbols={symbols}"
 
     data = fetch_json(url, "fx")
     if not data or not data.get("rates"):
         return None
 
-    points = sorted(
-        ({"date": d, "value": round(v["KRW"], 2)} for d, v in data["rates"].items() if "KRW" in v),
-        key=lambda p: p["date"],
-    )
-    if len(points) < 2:
-        ERRORS.append("fx: 데이터 포인트 부족")
+    rows = data["rates"]
+
+    usd = _stats(_series(rows, "USD"))
+    jpy = _stats(_series(rows, "JPY"), unit=100)
+    if not usd:
+        ERRORS.append("fx: 원/달러 계산 실패")
         return None
 
-    values = [p["value"] for p in points]
-    high = max(values)
-    low = min(values)
+    # 이슈 통화 추리기 — 달러와 다르게 움직인 것만, 벌어진 폭 큰 순으로 최대 2개
+    notable = []
+    for code, (name, unit) in WATCH.items():
+        st = _stats(_series(rows, code), unit=unit)
+        if not st:
+            continue
+        gap = round(st["pct_1m"] - usd["pct_1m"], 2)
+        if abs(gap) < NOTABLE_DIVERGENCE:
+            continue
+        direction = "더 오름" if gap > 0 else "더 내림"
+        reason = f"한 달 {st['pct_1m']:+.1f}% (달러 {usd['pct_1m']:+.1f}%보다 {abs(gap):.1f}%p {direction})"
+        if st["at_3m_high"]:
+            reason += " · 3개월 최고"
+        if st["at_3m_low"]:
+            reason += " · 3개월 최저"
+        st.update({"code": code, "name": name, "gap_vs_usd": gap, "reason": reason})
+        notable.append(st)
+    notable.sort(key=lambda x: abs(x["gap_vs_usd"]), reverse=True)
 
-    # 그래프용 13점: 균등 간격으로 뽑되 마지막(최신)은 반드시 포함
-    n = min(13, len(points))
-    step = (len(points) - 1) / (n - 1) if n > 1 else 1
-    series = [points[round(i * step)] for i in range(n)]
-    series[-1] = points[-1]
-
-    latest, prev = points[-1], points[-2]
     return {
-        "latest": latest["value"],
-        "latest_date": latest["date"],
-        "prev": prev["value"],
-        "change": round(latest["value"] - prev["value"], 2),
-        "high_3m": high,
-        "high_3m_date": next(p["date"] for p in points if p["value"] == high),
-        "low_3m": low,
-        "low_3m_date": next(p["date"] for p in points if p["value"] == low),
-        "pct_from_high": round((latest["value"] - high) / high * 100, 2),
-        "series": series,
+        "usd": usd,
+        "jpy": jpy,          # 100엔당 원
+        "notable": notable[:NOTABLE_MAX],
+        "notable_rule": f"원/달러와 한 달 변동률이 {NOTABLE_DIVERGENCE}%p 이상 벌어진 통화만",
         "source": "European Central Bank (frankfurter.dev)",
     }
 
