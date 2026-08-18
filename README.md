@@ -19,7 +19,7 @@ raw.githubusercontent ✅ 200   ← 유일하게 열린 문
 읽어 갑니다. PC를 켜둘 필요가 없습니다.
 
 ```
-매일 04:20  GitHub Actions → collect.py 실행 → data/latest.json 커밋
+매일 03:30  GitHub Actions → collect.py 실행 → data/latest.json 커밋
      05:00  브리핑 루틴 → 이 JSON 읽기 → 메일 발송
 ```
 
@@ -36,7 +36,7 @@ raw.githubusercontent ✅ 200   ← 유일하게 열린 문
 
 ## 손볼 일이 생기면
 
-- **발송 시각을 바꾸고 싶다** → `.github/workflows/collect.yml` 의 `cron` (UTC 기준, KST−9시간)
+- **수집 시각을 바꾸고 싶다** → `.github/workflows/collect.yml` 의 `cron` (UTC 기준, KST−9시간)
 - **항목을 더하고 싶다** → `collect.py`
 - **지금 당장 갱신하고 싶다** → 저장소 Actions 탭 → `브리핑 데이터 수집` → `Run workflow`
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """순스테이 아침 브리핑용 데이터 수집기.
 
-GitHub Actions가 매일 04:20(KST)에 실행해서 data/latest.json 을 갱신한다.
+GitHub Actions가 매일 03:30(KST)에 실행해서 data/latest.json 을 갱신한다.
 
 왜 이런 구조인가:
   브리핑을 보내는 클라우드 루틴 샌드박스는 외부 도메인을 화이트리스트로 막는다.
@@ -119,6 +119,8 @@ def _longest_run(hours, predicate):
         best = cur
     if not best:
         return None
+    if best[0]["hour"] == best[1]["hour"]:
+        return f"{best[0]['hour']:02d}시"
     return f"{best[0]['hour']:02d}시~{best[1]['hour']:02d}시"
 
 
