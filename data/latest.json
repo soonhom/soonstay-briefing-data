@@ -1,58 +1,77 @@
 {
-  "generated_at": "2026-11-20T09:44:12+09:00",
-  "date": "2026-11-20",
-  "weekday": "금",
+  "generated_at": "2026-11-21T09:03:54+09:00",
+  "date": "2026-11-21",
+  "weekday": "토",
   "is_swim_day": false,
   "fx": {
     "usd": {
-      "latest": 1328.45,
-      "latest_date": "2026-11-19",
-      "change": -3.88,
-      "change_pct": -0.29,
-      "high_3m": 1396.35,
-      "high_3m_date": "2026-08-20",
+      "latest": 1339.44,
+      "latest_date": "2026-11-20",
+      "change": 10.99,
+      "change_pct": 0.83,
+      "high_3m": 1388.1,
+      "high_3m_date": "2026-09-18",
       "low_3m": 1324.45,
       "low_3m_date": "2026-10-23",
-      "pct_from_high": -4.86,
-      "pct_1m": 0.05,
+      "pct_from_high": -3.51,
+      "pct_1m": 1.05,
       "at_3m_high": false,
       "at_3m_low": false,
       "unit": 1
     },
     "jpy": {
-      "latest": 830.43,
-      "latest_date": "2026-11-19",
-      "change": -5.31,
-      "change_pct": -0.64,
+      "latest": 844.3,
+      "latest_date": "2026-11-20",
+      "change": 13.87,
+      "change_pct": 1.67,
       "high_3m": 888.01,
       "high_3m_date": "2026-09-17",
       "low_3m": 830.43,
       "low_3m_date": "2026-11-19",
-      "pct_from_high": -6.48,
-      "pct_1m": -1.11,
+      "pct_from_high": -4.92,
+      "pct_1m": 0.56,
       "at_3m_high": false,
-      "at_3m_low": true,
+      "at_3m_low": false,
       "unit": 100
     },
     "notable": [
       {
-        "latest": 891.58,
-        "latest_date": "2026-11-19",
-        "change": -5.25,
-        "change_pct": -0.59,
+        "latest": 892.85,
+        "latest_date": "2026-11-20",
+        "change": 1.27,
+        "change_pct": 0.14,
         "high_3m": 994.02,
         "high_3m_date": "2026-08-26",
         "low_3m": 891.58,
         "low_3m_date": "2026-11-19",
-        "pct_from_high": -10.31,
-        "pct_1m": -3.87,
+        "pct_from_high": -10.18,
+        "pct_1m": -4.24,
         "at_3m_high": false,
-        "at_3m_low": true,
+        "at_3m_low": false,
         "unit": 1,
         "code": "AUD",
         "name": "호주달러",
-        "gap_vs_usd": -3.92,
-        "reason": "한 달 -3.9% (달러 +0.1%보다 3.9%p 더 내림) · 3개월 최저"
+        "gap_vs_usd": -5.29,
+        "reason": "한 달 -4.2% (달러 +1.1%보다 5.3%p 더 내림)"
+      },
+      {
+        "latest": 1472.04,
+        "latest_date": "2026-11-20",
+        "change": 11.81,
+        "change_pct": 0.81,
+        "high_3m": 1619.41,
+        "high_3m_date": "2026-08-21",
+        "low_3m": 1460.23,
+        "low_3m_date": "2026-11-19",
+        "pct_from_high": -9.1,
+        "pct_1m": -1.15,
+        "at_3m_high": false,
+        "at_3m_low": false,
+        "unit": 1,
+        "code": "EUR",
+        "name": "유로",
+        "gap_vs_usd": -2.2,
+        "reason": "한 달 -1.1% (달러 +1.1%보다 2.2%p 더 내림)"
       }
     ],
     "notable_rule": "원/달러와 한 달 변동률이 2.0%p 이상 벌어진 통화만",
@@ -60,186 +79,186 @@
   },
   "weather": {
     "today_min": {
-      "temp": 0.8,
-      "hour": "07시"
+      "temp": 0.4,
+      "hour": "05시"
     },
     "today_max": {
-      "temp": 7.0,
-      "hour": "15시"
+      "temp": 7.4,
+      "hour": "14시"
     },
-    "yesterday_min": 2.9,
-    "yesterday_max": 8.7,
-    "max_diff_vs_yesterday": -1.7,
+    "yesterday_min": 0.8,
+    "yesterday_max": 6.8,
+    "max_diff_vs_yesterday": 0.6,
     "max_pop": 0,
     "walk_window": "07시~20시",
     "caution_window": null,
     "hourly": [
       {
         "hour": 0,
-        "temp": 2.9,
+        "temp": 1.8,
         "pop": 0,
-        "wind": 2.16,
+        "wind": 2.06,
         "sky": "맑음"
       },
       {
         "hour": 1,
-        "temp": 2.6,
+        "temp": 1.4,
         "pop": 0,
-        "wind": 2.15,
+        "wind": 1.88,
         "sky": "맑음"
       },
       {
         "hour": 2,
-        "temp": 2.2,
+        "temp": 1.1,
         "pop": 0,
-        "wind": 2.41,
+        "wind": 1.75,
         "sky": "맑음"
       },
       {
         "hour": 3,
-        "temp": 1.8,
+        "temp": 0.7,
         "pop": 0,
-        "wind": 2.62,
+        "wind": 1.88,
         "sky": "맑음"
       },
       {
         "hour": 4,
-        "temp": 1.4,
+        "temp": 0.5,
         "pop": 0,
-        "wind": 3.04,
-        "sky": "대체로 맑음"
+        "wind": 1.88,
+        "sky": "맑음"
       },
       {
         "hour": 5,
-        "temp": 1.1,
+        "temp": 0.4,
         "pop": 0,
-        "wind": 2.76,
+        "wind": 1.84,
         "sky": "맑음"
       },
       {
         "hour": 6,
-        "temp": 0.9,
+        "temp": 0.6,
         "pop": 0,
-        "wind": 2.33,
-        "sky": "맑음"
+        "wind": 2.14,
+        "sky": "대체로 맑음"
       },
       {
         "hour": 7,
-        "temp": 0.8,
+        "temp": 0.7,
         "pop": 0,
-        "wind": 2.28,
+        "wind": 2.42,
         "sky": "대체로 맑음"
       },
       {
         "hour": 8,
         "temp": 1.1,
         "pop": 0,
-        "wind": 2.48,
-        "sky": "대체로 맑음"
+        "wind": 2.86,
+        "sky": "구름 조금"
       },
       {
         "hour": 9,
-        "temp": 1.9,
+        "temp": 2.0,
         "pop": 0,
-        "wind": 2.83,
-        "sky": "대체로 맑음"
+        "wind": 2.66,
+        "sky": "구름 조금"
       },
       {
         "hour": 10,
-        "temp": 3.0,
+        "temp": 3.3,
         "pop": 0,
-        "wind": 2.58,
-        "sky": "맑음"
+        "wind": 2.56,
+        "sky": "대체로 맑음"
       },
       {
         "hour": 11,
-        "temp": 4.2,
+        "temp": 4.9,
         "pop": 0,
-        "wind": 2.72,
+        "wind": 2.36,
         "sky": "맑음"
       },
       {
         "hour": 12,
-        "temp": 5.3,
+        "temp": 6.3,
         "pop": 0,
-        "wind": 3.4,
+        "wind": 1.98,
         "sky": "맑음"
       },
       {
         "hour": 13,
-        "temp": 6.2,
+        "temp": 7.1,
         "pop": 0,
-        "wind": 4.11,
+        "wind": 2.25,
         "sky": "맑음"
       },
       {
         "hour": 14,
-        "temp": 6.6,
+        "temp": 7.4,
         "pop": 0,
-        "wind": 4.03,
-        "sky": "대체로 맑음"
-      },
-      {
-        "hour": 15,
-        "temp": 7.0,
-        "pop": 0,
-        "wind": 4.59,
-        "sky": "대체로 맑음"
-      },
-      {
-        "hour": 16,
-        "temp": 6.3,
-        "pop": 0,
-        "wind": 4.22,
+        "wind": 2.64,
         "sky": "맑음"
       },
       {
-        "hour": 17,
-        "temp": 5.5,
+        "hour": 15,
+        "temp": 7.3,
         "pop": 0,
-        "wind": 3.45,
+        "wind": 2.56,
+        "sky": "맑음"
+      },
+      {
+        "hour": 16,
+        "temp": 7.0,
+        "pop": 0,
+        "wind": 2.5,
+        "sky": "대체로 맑음"
+      },
+      {
+        "hour": 17,
+        "temp": 6.0,
+        "pop": 0,
+        "wind": 2.16,
         "sky": "맑음"
       },
       {
         "hour": 18,
-        "temp": 4.9,
+        "temp": 5.0,
         "pop": 0,
-        "wind": 2.92,
+        "wind": 1.93,
         "sky": "맑음"
       },
       {
         "hour": 19,
-        "temp": 4.0,
+        "temp": 4.2,
         "pop": 0,
-        "wind": 2.28,
+        "wind": 2.02,
         "sky": "맑음"
       },
       {
         "hour": 20,
-        "temp": 3.3,
+        "temp": 3.5,
         "pop": 0,
-        "wind": 2.05,
+        "wind": 2.42,
         "sky": "맑음"
       },
       {
         "hour": 21,
-        "temp": 2.9,
+        "temp": 2.8,
         "pop": 0,
-        "wind": 1.91,
-        "sky": "대체로 맑음"
+        "wind": 2.73,
+        "sky": "맑음"
       },
       {
         "hour": 22,
-        "temp": 2.6,
+        "temp": 2.2,
         "pop": 0,
-        "wind": 1.66,
+        "wind": 2.69,
         "sky": "맑음"
       },
       {
         "hour": 23,
-        "temp": 2.3,
+        "temp": 1.8,
         "pop": 0,
-        "wind": 1.36,
+        "wind": 2.75,
         "sky": "맑음"
       }
     ],
@@ -247,132 +266,132 @@
   },
   "marine": {
     "at_0600": {
-      "wave_m": 0.38,
-      "sea_temp_c": 17.5
+      "wave_m": 0.32,
+      "sea_temp_c": 16.7
     },
-    "wave_max_m": 0.58,
+    "wave_max_m": 0.38,
     "suit_guide": "수트 권장",
     "visibility": "미제공 (공개 데이터 없음)",
     "hourly": [
       {
         "hour": 0,
-        "wave": 0.46,
-        "temp": 17.7
+        "wave": 0.36,
+        "temp": 16.9
       },
       {
         "hour": 1,
-        "wave": 0.44,
-        "temp": 17.7
+        "wave": 0.36,
+        "temp": 16.9
       },
       {
         "hour": 2,
-        "wave": 0.42,
-        "temp": 17.6
+        "wave": 0.36,
+        "temp": 16.9
       },
       {
         "hour": 3,
-        "wave": 0.4,
-        "temp": 17.6
+        "wave": 0.36,
+        "temp": 16.8
       },
       {
         "hour": 4,
-        "wave": 0.4,
-        "temp": 17.5
+        "wave": 0.34,
+        "temp": 16.8
       },
       {
         "hour": 5,
-        "wave": 0.38,
-        "temp": 17.5
+        "wave": 0.34,
+        "temp": 16.8
       },
       {
         "hour": 6,
-        "wave": 0.38,
-        "temp": 17.5
+        "wave": 0.32,
+        "temp": 16.7
       },
       {
         "hour": 7,
-        "wave": 0.38,
-        "temp": 17.4
+        "wave": 0.32,
+        "temp": 16.7
       },
       {
         "hour": 8,
-        "wave": 0.36,
-        "temp": 17.4
+        "wave": 0.3,
+        "temp": 16.6
       },
       {
         "hour": 9,
-        "wave": 0.36,
-        "temp": 17.4
+        "wave": 0.3,
+        "temp": 16.6
       },
       {
         "hour": 10,
-        "wave": 0.4,
-        "temp": 17.4
+        "wave": 0.3,
+        "temp": 16.6
       },
       {
         "hour": 11,
-        "wave": 0.44,
-        "temp": 17.3
+        "wave": 0.3,
+        "temp": 16.6
       },
       {
         "hour": 12,
-        "wave": 0.48,
-        "temp": 17.3
+        "wave": 0.3,
+        "temp": 16.6
       },
       {
         "hour": 13,
-        "wave": 0.52,
-        "temp": 17.3
+        "wave": 0.28,
+        "temp": 16.6
       },
       {
         "hour": 14,
-        "wave": 0.54,
-        "temp": 17.3
+        "wave": 0.28,
+        "temp": 16.6
       },
       {
         "hour": 15,
-        "wave": 0.58,
-        "temp": 17.3
+        "wave": 0.26,
+        "temp": 16.6
       },
       {
         "hour": 16,
-        "wave": 0.56,
-        "temp": 17.2
+        "wave": 0.28,
+        "temp": 16.6
       },
       {
         "hour": 17,
-        "wave": 0.54,
-        "temp": 17.2
+        "wave": 0.28,
+        "temp": 16.6
       },
       {
         "hour": 18,
-        "wave": 0.52,
-        "temp": 17.2
+        "wave": 0.3,
+        "temp": 16.5
       },
       {
         "hour": 19,
-        "wave": 0.48,
-        "temp": 17.1
+        "wave": 0.32,
+        "temp": 16.5
       },
       {
         "hour": 20,
-        "wave": 0.44,
-        "temp": 17.1
+        "wave": 0.34,
+        "temp": 16.5
       },
       {
         "hour": 21,
-        "wave": 0.4,
-        "temp": 17.0
+        "wave": 0.36,
+        "temp": 16.4
       },
       {
         "hour": 22,
-        "wave": 0.38,
-        "temp": 17.0
+        "wave": 0.36,
+        "temp": 16.4
       },
       {
         "hour": 23,
-        "wave": 0.34,
-        "temp": 17.0
+        "wave": 0.38,
+        "temp": 16.4
       }
     ],
     "source": "Open-Meteo Marine"
